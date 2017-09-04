@@ -5,11 +5,12 @@ services:
     working_dir: /opt/liquibase_test
     command: ./run_test.sh
     depends_on:
-      - mysql
+      - testdb
   testdb:
     image: mysql/mysql-server
     container_name: testdb
     environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: liquibase
       MYSQL_USER: liquibase
       MYSQL_PASSWORD: liquibase
