@@ -1,0 +1,15 @@
+sut:
+  build: .
+  working_dir: /opt/liquibase_test
+  command: ./run_test.sh
+  depends_on: - mysql
+testdb:
+  image: mysql/mysql-server
+  container_name: testdb
+  environment:
+    MYSQL_RANDOM_ROOT_PASSWORD: yes
+    MYSQL_DATABASE: liquibase
+    MYSQL_USER: liquibase
+    MYSQL_PASSWORD: liquibase
+  ports:
+    - 3306:3306
