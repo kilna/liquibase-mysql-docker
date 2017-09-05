@@ -6,7 +6,7 @@ ARG mysql_jdbc_download_url=https://dev.mysql.com/get/Downloads/Connector-J
 ENV LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
     LIQUIBASE_CLASSPATH=${LIQUIBASE_CLASSPATH:-/opt/jdbc/mysql-jdbc.jar}\
     LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-com.mysql.jdbc.Driver}\
-    LIQUIBASE_URL=${LIQUIBASE_URL:-jdbc:mysql://\${HOST}:\${PORT}/\${DATABASE}}
+    LIQUIBASE_URL=${LIQUIBASE_URL:-'jdbc:mysql://${HOST}:${PORT}/${DATABASE}'}
 
 COPY test /opt
 RUN set -e -o pipefail;\
