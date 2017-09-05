@@ -5,7 +5,7 @@ services:
     working_dir: /opt/liquibase_test
     command: ./run_test.sh
     depends_on:
-      - testdb
+      - db
   db:
     image: mysql/mysql-server
     container_name: db
