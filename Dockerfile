@@ -8,6 +8,7 @@ ENV LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
     LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-com.mysql.jdbc.Driver}\
     LIQUIBASE_URL=${LIQUIBASE_URL:-jdbc:mysql://\${HOST}:\${PORT}/\${DATABASE}}
 
+COPY test /opt
 RUN set -e -o pipefail;\
     cd /opt/jdbc;\
     tarfile=mysql-connector-java-${mysql_jdbc_version}.tar.gz;\

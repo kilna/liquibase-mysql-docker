@@ -2,8 +2,7 @@ version: '3'
 services:
   sut:
     build: .
-    working_dir: /opt/liquibase_test
-    command: ./run_test.sh
+    command: /opt/test/run_test.sh
     depends_on:
       - db
   db:
