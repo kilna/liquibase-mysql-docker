@@ -6,9 +6,9 @@ services:
     command: ./run_test.sh
     depends_on:
       - testdb
-  testdb:
+  db:
     image: mysql/mysql-server
-    container_name: testdb
+    container_name: db
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: liquibase
