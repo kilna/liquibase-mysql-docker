@@ -1,4 +1,5 @@
 FROM kilna/liquibase
+LABEL maintainer="Kilna kilna@kilna.com"
 
 ARG mysql_jdbc_version=5.1.44
 ARG mysql_jdbc_download_url=https://dev.mysql.com/get/Downloads/Connector-J
