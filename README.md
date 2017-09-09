@@ -5,7 +5,9 @@
 [![](https://img.shields.io/docker/stars/kilna/liquibase-mysql.svg?style=plastic)](https://hub.docker.com/r/kilna/liquibase-mysql/)
 [![](https://img.shields.io/badge/docker_build-automated-blue.svg?style=plastic)](https://cloud.docker.com/swarm/kilna/repository/docker/kilna/liquibase-mysql/builds)
 
-**A lightweight Docker for running [Liquibase](https://www.liquibase.org) with [MySQL](http://www.mysql.com) databases** - DockerHub: [liquibase-mysql](https://hub.docker.com/r/kilna/liquibase-mysql/) - GitHub: [liquibase-mysql-docker](https://github.com/kilna/liquibase-mysql-docker)
+**A lightweight Docker for running [Liquibase](https://www.liquibase.org) with [MySQL](http://www.mysql.com) databases**
+
+DockerHub: [liquibase-mysql](https://hub.docker.com/r/kilna/liquibase-mysql/) - GitHub: [liquibase-mysql-docker](https://github.com/kilna/liquibase-mysql-docker)
 
 # Usage
 
