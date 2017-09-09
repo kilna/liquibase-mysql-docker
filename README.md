@@ -69,8 +69,6 @@ In order to create the liquibase.properties file, it uses the follow environment
 | LIQUIBASE_URL        | JDBC URL for connection | jdbc:mysql://${HOST}:${PORT}/${DATABASE} |
 | LIQUIBASE_DEBUG      | If set to 'yes', when _docker run_ is executed, will show the values of all LIQUIBASE_* environment variables and describes any substitutions performed on _liquibase.properties_ | _unset_ |
 
-_* Not applicable to file-based databases (SQLite) - † Used as the filename for file-based databases (SQLite)_
-
 The generated _liquibase.properties_ file is loaded into the default working dir _/workspace_ (which is also shared as a docker volume). The _/workspace/liquibase.properties_ file will have any variables substituted each time a 'docker run' command is performed...  so you can load your own _/workspace/liquibase.properties_ file and put `${HOST}` in it, and it will be replaced with the LIQUIBASE_HOST environment variable.
 
 If you want to see what the contents of the generated _liquibase.properties_ file are, you can:
