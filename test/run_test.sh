@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -e -o pipefail
+set -e -o pipefail
 
 until nc -z -v -w 10 db 3306; do
   echo "Waiting for database connection..."
@@ -7,5 +7,5 @@ until nc -z -v -w 10 db 3306; do
 done
 
 echo "Applying changelog"
-liquibase --changeLogFile=/opt/test/changelog.xml updateTestingRollback
+liquibase --changeLogFile=/opt/test_liquibase_mysql/changelog.xml updateTestingRollback
 

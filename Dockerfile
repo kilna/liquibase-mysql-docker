@@ -9,9 +9,9 @@ ENV LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
     LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-com.mysql.jdbc.Driver}\
     LIQUIBASE_URL=${LIQUIBASE_URL:-'jdbc:mysql://${HOST}:${PORT}/${DATABASE}'}
 
-COPY test/ /opt/test/
+COPY test/ /opt/test_liquibase_mysql/
 RUN set -e -o pipefail;\
-    chmod +x /opt/test/run_test.sh;\
+    chmod +x /opt/test_liquibase_mysql/run_test.sh;\
     cd /opt/jdbc;\
     tarfile=mysql-connector-java-${mysql_jdbc_version}.tar.gz;\
     curl -SOLs ${mysql_jdbc_download_url}/${tarfile};\
@@ -19,6 +19,5 @@ RUN set -e -o pipefail;\
     jarfile=mysql-connector-java-${mysql_jdbc_version}-bin.jar;\
     mv mysql-connector-java-${mysql_jdbc_version}/${jarfile} ./;\
     rm -rf ${tarfile} mysql-connector-java-${mysql_jdbc_version};\
-    ln -s ${jarfile} mysql-jdbc.jar;\
-    set | grep -F LIQUIBASE_
+    ln -s ${jarfile} mysql-jdbc.jar;
 
