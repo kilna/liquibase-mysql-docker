@@ -17,6 +17,7 @@ done
 if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
   git fetch -p origin
+  git remote prune origin
   git pull
   [[ "$dockerhub_user" == '' ]] && echo "Must be logged into dockerhub with docker login" >&2 && exit 180
   [[ "$github_token" == '' ]] && echo "Environment variable github_token must be set" >&2 && exit 181
@@ -40,7 +41,7 @@ docker-compose -f docker-compose.test.yml down $rmi
 
 (( $publish )) || exit 0
 
-desc="From $driver_pretty $version" "v$version"
+desc="From $driver_pretty v$version"
 
 header "GitHub Deleting Prior Release $project $version"
 curl -X DELETE https://api.github.com/repos/$github_user/${project}-docker/releases/v$version?access_token=$github_token || true
