@@ -9,11 +9,11 @@ services:
         jdbc_driver_version: ${jdbc_driver_version}
     command: /opt/test_liquibase_mysql/run_test.sh
     depends_on:
-      - mysql_db
+      - db
     image: liquibase-mysql:build
-  mysql_db:
+  db:
     image: mysql/mysql-server
-    container_name: mysql_db
+    container_name: db
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: liquibase
