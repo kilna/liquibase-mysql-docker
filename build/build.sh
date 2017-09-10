@@ -42,6 +42,8 @@ docker-compose -f docker-compose.test.yml down $rmi
 
 (( $publish )) || exit 0
 
+desc="From $driver_pretty $version" "v$version"
+
 header "GitHub Deleting Prior Release $project $version"
 curl -X DELETE https://api.github.com/repos/$github_user/${project}-docker/releases/v$version?access_token=$github_token || true
 
@@ -57,11 +59,11 @@ if [[ `git status` != *'working tree clean'* ]]; then
   git commit -m "Updating .env with version $version" || true
   git push origin
 fi
-git tag -m "From $driver_pretty $version" "v$version"
+git tag -m "$desc"
 git push origin "v$version"
 
 header "GitHub Releasing $project $version"
-curl --data '{"tag_name": "v'"$version"'","target_commitish": "master","name": "From '"$driver_pretty"' v'"$version"'","draft": false,"prerelease": false}' \
+curl --data '{"tag_name": "v'"$version"'","target_commitish": "master","name": "'"$desc"'","draft": false,"prerelease": false}' \
   https://api.github.com/repos/$github_user/${project}-docker/releases?access_token=$github_token
 
 header "Docker Tagging and Pushing $project:$version"
