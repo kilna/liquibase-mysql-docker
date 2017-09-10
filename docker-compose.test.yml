@@ -1,10 +1,16 @@
 version: '3'
 services:
   sut:
-    build: .
+    env_file:
+      - .env
+    build:
+      context: .
+      args:
+        jdbc_driver_version: ${jdbc_driver_version}
     command: /opt/test_liquibase_mysql/run_test.sh
     depends_on:
       - db
+    image: liquibase-mysql:build
   db:
     image: mysql/mysql-server
     container_name: db
