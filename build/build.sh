@@ -1,6 +1,8 @@
 #!/bin/bash
 set -e -o pipefail
 
+source build/project.sh
+
 publish=0
 rmi=''
 while [[ "${1:-NULL}" != 'NULL' ]]; do
@@ -11,10 +13,6 @@ while [[ "${1:-NULL}" != 'NULL' ]]; do
     *)             echo "Unknown argument $1" >&2; exit 1 ;;
   esac
 done
-
-project="liquibase-mysql"
-driver_pretty="MySQL JDBC Driver"
-github_user="kilna"
 
 if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
