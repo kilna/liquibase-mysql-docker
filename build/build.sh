@@ -58,7 +58,7 @@ set -x
 git add -f .env
 git commit -m "Updating .env with version $version" || true
 git push origin
-git tag -m "$desc"
+git tag -m "$desc" "v$version"
 git push origin "v$version"
 
 header "GitHub Releasing $project $version"
