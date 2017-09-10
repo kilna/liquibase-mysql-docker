@@ -18,9 +18,10 @@ if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
   git fetch -p origin
   git remote prune origin
-  git pull
+  git pull origin
   [[ "$dockerhub_user" == '' ]] && echo "Must be logged into dockerhub with docker login" >&2 && exit 180
   [[ "$github_token" == '' ]] && echo "Environment variable github_token must be set" >&2 && exit 181
+  [[ `git status` != *'working tree clean'* ]] && echo "Working directory must be clean" >&2 && exit 182
 fi
 
 latest_version=$(tail -1 build/versions.txt)
@@ -53,11 +54,9 @@ fi
 git push origin ":v$version" || true
 
 header "Git Tagging $project $version"
-if [[ `git status` != *'working tree clean'* ]]; then
-  git add .env
-  git commit -m "Updating .env with version $version" || true
-  git push origin
-fi
+git add -f .env
+git commit -m "Updating .env with version $version" || true
+git push origin
 git tag -m "$desc"
 git push origin "v$version"
 
