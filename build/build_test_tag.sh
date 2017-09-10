@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e -o pipefail
 
-project="liquibase-mysq;"
+project="liquibase-mysql"
 driver_pretty="MySQL JDBC Driver"
 github_user="kilna"
 
@@ -11,7 +11,7 @@ version="${1:-$latest_version}"
 
 git fetch -p origin
 git remote prune origin
-git pull
+#git pull
 [[ "$dockerhub_user" == '' ]] && echo "Must be logged into dockerhub with docker login" >&2 && exit 180
 [[ "$github_token" == '' ]] && echo "Environment variable github_token must be set" >&2 && exit 181
 

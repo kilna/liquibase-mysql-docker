@@ -12,6 +12,7 @@ ENV LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
 
 COPY test/ /opt/test_liquibase_mysql/
 RUN set -e -o pipefail;\
+    echo "JDBC DRIVER VERSION: $jdbc_driver_version";\
     chmod +x /opt/test_liquibase_mysql/run_test.sh;\
     cd /opt/jdbc;\
     tarfile=mysql-connector-java-${jdbc_driver_version}.tar.gz;\
