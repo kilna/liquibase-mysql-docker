@@ -16,6 +16,7 @@ done
 
 if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
+  set -x
   git fetch -p
   git remote prune origin
   git pull
