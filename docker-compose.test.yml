@@ -10,7 +10,7 @@ services:
     command: /opt/test_liquibase_mysql/run_test.sh
     depends_on:
       - db
-    image: liquibase-mysql-docker:build
+    image: liquibase-mysql:build
   db:
     image: mysql/mysql-server
     container_name: db
