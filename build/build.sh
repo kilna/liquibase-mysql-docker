@@ -16,11 +16,9 @@ done
 
 if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
-  set -x
   git fetch -p
   git remote prune origin
   git pull
-  set +x
   [[ "$dockerhub_user" == '' ]] && echo "Must be logged into dockerhub with docker login" >&2 && exit 180
   [[ "$github_token" == '' ]] && echo "Environment variable github_token must be set" >&2 && exit 181
   [[ `git status` != *'working tree clean'* ]] && echo "Working directory must be clean" >&2 && exit 182
