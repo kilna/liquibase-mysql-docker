@@ -2,10 +2,9 @@ FROM kilna/liquibase
 LABEL maintainer="Kilna kilna@kilna.com"
 
 ARG jdbc_driver_version
-ENV jdbc_driver_version=${jdbc_driver_vesion:-5.1.44}
-ARG jdbc_driver_download_url=https://dev.mysql.com/get/Downloads/Connector-J
-
-ENV LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
+ENV jdbc_driver_version=${jdbc_driver_version:-5.1.44}\
+    jdbc_driver_download_url=https://dev.mysql.com/get/Downloads/Connector-J\
+    LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
     LIQUIBASE_CLASSPATH=${LIQUIBASE_CLASSPATH:-/opt/jdbc/mysql-jdbc.jar}\
     LIQUIBASE_DRIVER=${LIQUIBASE_DRIVER:-com.mysql.jdbc.Driver}\
     LIQUIBASE_URL=${LIQUIBASE_URL:-'jdbc:mysql://${HOST}:${PORT}/${DATABASE}'}
