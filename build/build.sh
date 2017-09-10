@@ -2,10 +2,12 @@
 set -e -o pipefail
 
 publish=0
+rmi=''
 while [[ "${1:-NULL}" != 'NULL' ]]; do
   case "$1" in
     -v|--version)  version="$2"; shift; shift ;;
     -p|--publish)  publish=1; shift ;;
+    -r|--rmi)      rmi='--rmi all'; shift ;;
     *)             echo "Unknown argument $1" >&2; exit 1 ;;
   esac
 done
@@ -25,7 +27,6 @@ fi
 latest_version=$(tail -1 build/versions.txt)
 version="${version:-$latest_version}"
 
-
 header() { printf '=%.0s' {1..79}; echo; echo $@; printf '=%.0s' {1..79}; echo; }
 
 header "Building $project $version"
@@ -33,9 +34,11 @@ echo "jdbc_driver_version=$version" > .env
 docker build --tag "$project:build" --no-cache --pull --compress --build-arg jdbc_driver_version="$version" .
 
 header "Testing $project $version"
-docker-compose -f docker-compose.test.yml down &>/dev/null || true
-docker-compose -f docker-compose.test.yml up --exit-code-from sut --force-recreate --remove-orphans
-docker-compose -f docker-compose.test.yml down
+docker-compose -f docker-compose.test.yml down $rmi &>/dev/null || true
+file=`mktemp`
+docker-compose -f docker-compose.test.yml up --exit-code-from sut --force-recreate --remove-orphans 2>&1 | tee "$file"
+[[ $(cat "$file") != *"sut_1 exited with code 0"* ]] && exit 1
+docker-compose -f docker-compose.test.yml down $rmi
 
 (( $publish )) || exit 0
 
