@@ -54,7 +54,7 @@ fi
 git push origin ":v$version" || true
 
 header "Git Tagging $project $version"
-set -e
+set -x
 git add -f .env
 git commit -m "Updating .env with version $version" || true
 git push origin
