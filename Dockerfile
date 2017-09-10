@@ -10,7 +10,7 @@ ENV jdbc_driver_version=${jdbc_driver_version:-5.1.44}\
     LIQUIBASE_URL=${LIQUIBASE_URL:-'jdbc:mysql://${HOST}:${PORT}/${DATABASE}'}
 
 COPY test/ /opt/test_liquibase_mysql/
-RUN set -e -o pipefail;\
+RUN set -x -e -o pipefail;\
     echo "JDBC DRIVER VERSION: $jdbc_driver_version";\
     chmod +x /opt/test_liquibase_mysql/run_test.sh;\
     cd /opt/jdbc;\

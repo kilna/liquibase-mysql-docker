@@ -1,11 +1,11 @@
 #!/bin/bash
 set -e -o pipefail
 
-tag=0
+publish=0
 while [[ "${1:-NULL}" != 'NULL' ]]; do
   case "$1" in
     -v|--version)  version="$2"; shift; shift ;;
-    -t|--tag)      tag=1; shift ;;
+    -p|--publish)  publish=1; shift ;;
     *)             echo "Unknown argument $1" >&2; exit 1 ;;
   esac
 done
@@ -14,7 +14,7 @@ project="liquibase-mysql"
 driver_pretty="MySQL JDBC Driver"
 github_user="kilna"
 
-if (( $tag )); then
+if (( $publish )); then
   dockerhub_user=$(docker info | grep Username | cut -d ' ' -f 2)
   git fetch -p origin
   git pull
@@ -37,7 +37,7 @@ docker-compose -f docker-compose.test.yml down &>/dev/null || true
 docker-compose -f docker-compose.test.yml up --exit-code-from sut --force-recreate --remove-orphans
 docker-compose -f docker-compose.test.yml down
 
-(( $tag )) || exit 0
+(( $publish )) || exit 0
 
 header "GitHub Deleting Prior Release $project $version"
 curl -X DELETE https://api.github.com/repos/$github_user/${project}-docker/releases/v$version?access_token=$github_token || true
