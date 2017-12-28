@@ -2,7 +2,7 @@ FROM kilna/liquibase
 LABEL maintainer="Kilna kilna@kilna.com"
 
 ARG jdbc_driver_version
-ENV jdbc_driver_version=${jdbc_driver_version:-5.1.44}\
+ENV jdbc_driver_version=${jdbc_driver_version:-$(cat .env|grep jdbce_driver_version|cut -d = -f 2)}\
     jdbc_driver_download_url=https://dev.mysql.com/get/Downloads/Connector-J\
     LIQUIBASE_PORT=${LIQUIBASE_PORT:-3306}\
     LIQUIBASE_CLASSPATH=${LIQUIBASE_CLASSPATH:-/opt/jdbc/mysql-jdbc.jar}\
