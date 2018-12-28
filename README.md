@@ -16,7 +16,7 @@ DockerHub: [liquibase-mysql](https://hub.docker.com/r/kilna/liquibase-mysql/) - 
 You can use this image by creating your own `Dockerfile` which inherits using a FROM line:
 
 ```
-FROM kilna/liquibase-mysql-docker
+FROM kilna/liquibase-mysql
 ENV LIQUIBASE_HOST=database.server
 ENV LIQUIBASE_DATABASE=dbname
 ENV LIQUIBASE_USERNAME=user
